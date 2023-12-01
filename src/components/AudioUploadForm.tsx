@@ -26,18 +26,20 @@ const AudioUploadForm = () => {
           fullWidth
           margin="normal"
         />
-        <UploadButton
-          endpoint="audioUploader"
-          onClientUploadComplete={(res) => {
-            // Do something with the response
-            console.log("Files: ", res);
-            alert("Upload Completed");
-          }}
-          onUploadError={(error: Error) => {
-            // Do something with the error.
-            alert(`ERROR! ${error.message}`);
-          }}
-        />
+        <Box width="145px" marginTop="1rem">
+          <UploadButton
+            endpoint="audioUploader"
+            onClientUploadComplete={(res) => {
+              // Do something with the response
+              console.log("Files: ", res);
+              alert("Upload Completed");
+            }}
+            onUploadError={(error: Error) => {
+              // Do something with the error.
+              alert(`ERROR! ${error.message}`);
+            }}
+          />
+        </Box>
         <Button
           disabled={isSaveDisabled}
           sx={{ marginTop: "1rem" }}

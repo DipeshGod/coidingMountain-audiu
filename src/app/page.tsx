@@ -1,7 +1,11 @@
+import { Container, Typography } from "@mui/material";
+
 export default function Home() {
   return (
     <main>
-      <h1>Welcome to audio</h1>
+      <Container>
+        <Typography variant="h2">Welcome To Auidu</Typography>
+      </Container>
     </main>
   );
 }

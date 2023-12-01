@@ -1,14 +1,25 @@
 import { UploadButton } from "@/utils/uploadthing";
+import { useAuth } from "@clerk/nextjs";
 import { Box, Button, Container, TextField } from "@mui/material";
+import axios from "axios";
 import { useState } from "react";
 
-const AudioUploadForm = () => {
+const AudioUploadForm = ({ setOpen }: any) => {
   const [fileTitle, setFileTitle] = useState<any>();
   const [uploadedFileUrl, setUploadedFileUrl] = useState<any>();
+  const auth = useAuth();
 
-  const handleSubmit = () => {
-    console.log("uploadedFileUrl", uploadedFileUrl);
-    console.log("fileTitle", fileTitle);
+  const handleSubmit = async () => {
+    try {
+      await axios.post("/api/upload", {
+        userId: auth.userId,
+        uploadedFileUrl,
+        fileTitle,
+      });
+      setOpen(false);
+    } catch (err) {
+      console.log("err", err);
+    }
   };
 
   return (

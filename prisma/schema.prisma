@@ -14,6 +14,7 @@ model AudioUploads {
   id             Int    @id @default(autoincrement())
   fineName       String
   uploadedByUser String
+  fileUrl        String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

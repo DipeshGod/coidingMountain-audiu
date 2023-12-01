@@ -52,7 +52,7 @@ export default function UploadAudioModal({ open, setOpen }: any) {
             </Button>
           </Toolbar>
         </AppBar>
-        <AudioUploadForm />
+        <AudioUploadForm setOpen={setOpen} />
       </Dialog>
     </React.Fragment>
   );

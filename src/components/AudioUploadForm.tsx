@@ -5,18 +5,20 @@ import axios from "axios";
 import { useState } from "react";
 
 const AudioUploadForm = ({ setOpen }: any) => {
-  const [fileTitle, setFileTitle] = useState<any>();
-  const [uploadedFileUrl, setUploadedFileUrl] = useState<any>();
+  const [fileTitle, setFileTitle] = useState<any>("");
+  const [uploadedFileUrl, setUploadedFileUrl] = useState<any>("");
   const auth = useAuth();
 
   const handleSubmit = async () => {
     try {
-      await axios.post("/api/upload", {
+      await axios.post("/api/audio", {
         userId: auth.userId,
         uploadedFileUrl,
         fileTitle,
       });
       setOpen(false);
+      setUploadedFileUrl("");
+      setFileTitle("");
     } catch (err) {
       console.log("err", err);
     }
@@ -44,6 +46,7 @@ const AudioUploadForm = ({ setOpen }: any) => {
           />
         </Box>
         <Button
+          disabled={fileTitle?.length < 5 || uploadedFileUrl?.length < 5}
           sx={{ marginTop: "1rem" }}
           variant="contained"
           onClick={handleSubmit}

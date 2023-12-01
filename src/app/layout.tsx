@@ -6,12 +6,14 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import Navbar from "@/components/Navbar";
+import { Box, Container } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Audiu",
-  description: "Easily Make Them Listen",
+  description: "Make Them Listen",
 };
 
 export default function RootLayout({
@@ -22,7 +24,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Navbar />
+          <Box paddingY="2rem">
+            <Container>{children}</Container>
+          </Box>
+        </body>
       </html>
     </ClerkProvider>
   );

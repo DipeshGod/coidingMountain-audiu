@@ -3,7 +3,13 @@ import { Box, Button, Container, TextField } from "@mui/material";
 import { useState } from "react";
 
 const AudioUploadForm = () => {
-  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const [fileTitle, setFileTitle] = useState<any>();
+  const [uploadedFileUrl, setUploadedFileUrl] = useState<any>();
+
+  const handleSubmit = () => {
+    console.log("uploadedFileUrl", uploadedFileUrl);
+    console.log("fileTitle", fileTitle);
+  };
 
   return (
     <Container>
@@ -13,25 +19,23 @@ const AudioUploadForm = () => {
           variant="outlined"
           fullWidth
           margin="normal"
+          onChange={(e) => setFileTitle(e.target.value)}
         />
         <Box width="145px" marginTop="1rem">
           <UploadButton
             endpoint="audioUploader"
             onClientUploadComplete={(res) => {
-              // Do something with the response
-              console.log("Files: ", res);
-              alert("Upload Completed");
+              setUploadedFileUrl(res[0].url);
             }}
             onUploadError={(error: Error) => {
-              // Do something with the error.
-              alert(`ERROR! ${error.message}`);
+              console.log("error");
             }}
           />
         </Box>
         <Button
-          disabled={isSaveDisabled}
           sx={{ marginTop: "1rem" }}
           variant="contained"
+          onClick={handleSubmit}
         >
           Save
         </Button>

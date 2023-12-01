@@ -12,7 +12,7 @@ datasource db {
 
 model AudioUploads {
   id             Int    @id @default(autoincrement())
-  fineName       String
+  fileName       String
   uploadedByUser String
   fileUrl        String
 

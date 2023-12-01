@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     const data = await request.json();
     const uploadedData = await prisma.audioUploads.create({
       data: {
-        fineName: data.fileTitle,
+        fileName: data.fileTitle,
         uploadedByUser: data.userId,
         fileUrl: data.uploadedFileUrl,
       },

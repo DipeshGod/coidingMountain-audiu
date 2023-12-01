@@ -13,7 +13,7 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 
-export default function AudioCard() {
+export default function AudioCard({ fileName }: any) {
   const theme = useTheme();
 
   return (
@@ -27,7 +27,7 @@ export default function AudioCard() {
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography component="div" variant="h5">
-            Live From Space
+            {fileName}
           </Typography>
           <Typography
             variant="subtitle1"

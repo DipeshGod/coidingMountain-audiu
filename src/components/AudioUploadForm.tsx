@@ -3,19 +3,7 @@ import { Box, Button, Container, TextField } from "@mui/material";
 import { useState } from "react";
 
 const AudioUploadForm = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-
-  const handleFileChange = (event: any) => {
-    const file = event.target.files[0];
-
-    if (file && file.type.startsWith("audio/")) {
-      setSelectedFile(file);
-    } else {
-      setSelectedFile(null);
-      console.log("Please select an audio file.");
-    }
-  };
 
   return (
     <Container>

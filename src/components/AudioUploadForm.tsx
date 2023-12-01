@@ -1,3 +1,4 @@
+import { UploadButton } from "@/utils/uploadthing";
 import { Box, Button, Container, TextField } from "@mui/material";
 import { useState } from "react";
 
@@ -25,16 +26,16 @@ const AudioUploadForm = () => {
           fullWidth
           margin="normal"
         />
-        <TextField
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          type="file"
-          InputProps={{
-            inputProps: {
-              accept: "audio/*",
-            },
-            onChange: handleFileChange,
+        <UploadButton
+          endpoint="audioUploader"
+          onClientUploadComplete={(res) => {
+            // Do something with the response
+            console.log("Files: ", res);
+            alert("Upload Completed");
+          }}
+          onUploadError={(error: Error) => {
+            // Do something with the error.
+            alert(`ERROR! ${error.message}`);
           }}
         />
         <Button

@@ -18,10 +18,12 @@ import {
 } from "@mui/material";
 import { useRef, useState } from "react";
 import { Pause, PlayArrow, VolumeUp } from "@mui/icons-material";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
+import axios from "axios";
 
 const AudioDetailsPlayer = () => {
   const params = useSearchParams();
+  const p = useParams();
 
   const [isGenerateLinkDialogOpen, setIsGenerateLinkDialogOpen] =
     useState(false);
@@ -74,6 +76,14 @@ const AudioDetailsPlayer = () => {
   useEffect(() => {
     audioRef.current.currentTime = Number(params.get("playFrom"));
   }, [params]);
+
+  useEffect(() => {
+    const increaseAudioPlayStat = async () => {
+      await axios.post("/api/audioplays", { id: p.id });
+    };
+
+    increaseAudioPlayStat();
+  }, [p.id]);
 
   return (
     <div>

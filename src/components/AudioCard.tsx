@@ -41,7 +41,7 @@ export default function AudioCard({
           </Typography>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-          <Link href={`/audio/${id}`}>
+          <Link href={`/audio/${id}?fileUrl=${fileUrl}`}>
             <IconButton aria-label="play/pause">
               <PlayArrowIcon sx={{ height: 38, width: 38 }} />
             </IconButton>

@@ -1,27 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
-  Box,
+  Button,
   Card,
   CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Grid,
   IconButton,
   Slider,
+  Stack,
   Typography,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import { Pause, PlayArrow, VolumeUp } from "@mui/icons-material";
+import { useSearchParams } from "next/navigation";
 
 const AudioDetailsPlayer = () => {
+  const params = useSearchParams();
+
+  const [isGenerateLinkDialogOpen, setIsGenerateLinkDialogOpen] =
+    useState(false);
+  const [shareTimeStamp, setShareTimeStamp] = useState<any>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(0.5);
-  const audioRef = useRef(
-    new Audio(
-      "https://utfs.io/f/b28ae5ac-f182-48d4-bd17-5a7c7dba0293-tkp2u1.mp3"
-    )
-  );
+  const audioRef = useRef(new Audio(params.get("fileUrl")!));
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -55,6 +63,19 @@ const AudioDetailsPlayer = () => {
     )}`;
   };
 
+  const handleGenerateLinkClick = () => {
+    navigator.clipboard.writeText(
+      `${window.location.href}&playFrom=${shareTimeStamp}`
+    );
+    alert("Link copied to clipboard");
+    setIsGenerateLinkDialogOpen(false);
+  };
+
+  useEffect(() => {
+    audioRef.current.currentTime = Number(params.get("playFrom"));
+    setCurrentTime(Number(params.get("playFrom")));
+  }, [params]);
+
   return (
     <div>
       <Card>
@@ -68,9 +89,7 @@ const AudioDetailsPlayer = () => {
       <div>
         <audio
           ref={audioRef}
-          src={
-            "https://utfs.io/f/b28ae5ac-f182-48d4-bd17-5a7c7dba0293-tkp2u1.mp3"
-          }
+          src={`${params.get("fileUrl")}`}
           onTimeUpdate={updateTime}
           onEnded={() => setIsPlaying(false)}
         ></audio>
@@ -82,7 +101,7 @@ const AudioDetailsPlayer = () => {
           </Grid>
           <Grid item xs>
             <Slider
-              sx={{ width: "100px" }}
+              sx={{ width: "50%" }}
               value={currentTime}
               onChange={handleSeek}
               max={audioRef.current.duration || 0}
@@ -99,6 +118,7 @@ const AudioDetailsPlayer = () => {
           </Grid>
           <Grid item xs>
             <Slider
+              sx={{ width: "50%" }}
               value={volume}
               onChange={handleVolumeChange}
               min={0}
@@ -108,6 +128,42 @@ const AudioDetailsPlayer = () => {
             />
           </Grid>
         </Grid>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setIsGenerateLinkDialogOpen(true)}
+        >
+          Get Link To Share
+        </Button>
+
+        <Dialog
+          open={isGenerateLinkDialogOpen}
+          onClose={() => setIsGenerateLinkDialogOpen(false)}
+        >
+          <DialogTitle>Generate Link</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Please Specify The Duration if you want other to listen from
+              certain points in the audio.
+            </DialogContentText>
+            <Stack direction="row" spacing={5} marginTop="1rem">
+              <input
+                type="range"
+                max={audioRef.current.duration}
+                value={shareTimeStamp}
+                min={0}
+                onChange={(e) => setShareTimeStamp(e.target.value)}
+              />
+              <Typography>Play From: {shareTimeStamp} sec</Typography>
+            </Stack>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setIsGenerateLinkDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleGenerateLinkClick}>Generate Link</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );

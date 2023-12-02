@@ -73,7 +73,6 @@ const AudioDetailsPlayer = () => {
 
   useEffect(() => {
     audioRef.current.currentTime = Number(params.get("playFrom"));
-    setCurrentTime(Number(params.get("playFrom")));
   }, [params]);
 
   return (

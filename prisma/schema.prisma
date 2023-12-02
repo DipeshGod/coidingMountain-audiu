@@ -16,6 +16,8 @@ model AudioUploads {
   uploadedByUser String
   fileUrl        String
 
+  totalNumberOfPlays Int @default(0)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }

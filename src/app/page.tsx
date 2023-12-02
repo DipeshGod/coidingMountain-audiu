@@ -19,6 +19,7 @@ export default async function Home() {
               fileName={item.fileName}
               totalNumberOfPlays={item.totalNumberOfPlays}
               fileUrl={item.fileUrl}
+              id={item.id}
             />
           );
         })}

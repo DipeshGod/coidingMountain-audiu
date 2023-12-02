@@ -8,18 +8,15 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+import Link from "next/link";
 
 export default function AudioCard({
   fileName,
   totalNumberOfPlays,
   fileUrl,
+  id,
 }: any) {
-  const theme = useTheme();
-
   return (
     <Card
       sx={{
@@ -44,23 +41,11 @@ export default function AudioCard({
           </Typography>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-          <IconButton aria-label="previous">
-            {theme.direction === "rtl" ? (
-              <SkipNextIcon />
-            ) : (
-              <SkipPreviousIcon />
-            )}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === "rtl" ? (
-              <SkipPreviousIcon />
-            ) : (
-              <SkipNextIcon />
-            )}
-          </IconButton>
+          <Link href={`/audio/${id}`}>
+            <IconButton aria-label="play/pause">
+              <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+            </IconButton>
+          </Link>
         </Box>
       </Box>
       <CardMedia

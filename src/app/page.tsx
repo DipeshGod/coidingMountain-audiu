@@ -1,5 +1,6 @@
 import AudioCard from "@/components/AudioCard";
 import prisma from "@/lib/prisma";
+import { useAuth } from "@clerk/nextjs";
 import { Box, Typography } from "@mui/material";
 
 export default async function Home() {
@@ -12,7 +13,14 @@ export default async function Home() {
       </Typography>
       <Box display="flex" justifyContent="space-between" flexWrap="wrap">
         {data.map((item) => {
-          return <AudioCard key={item.id} fileName={item.fileName} />;
+          return (
+            <AudioCard
+              key={item.id}
+              fileName={item.fileName}
+              totalNumberOfPlays={item.totalNumberOfPlays}
+              fileUrl={item.fileUrl}
+            />
+          );
         })}
       </Box>
     </main>

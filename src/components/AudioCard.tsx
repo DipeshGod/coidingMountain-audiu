@@ -13,7 +13,11 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 
-export default function AudioCard({ fileName }: any) {
+export default function AudioCard({
+  fileName,
+  totalNumberOfPlays,
+  fileUrl,
+}: any) {
   const theme = useTheme();
 
   return (
@@ -34,7 +38,9 @@ export default function AudioCard({ fileName }: any) {
             color="text.secondary"
             component="div"
           >
-            Mac Miller
+            {totalNumberOfPlays > 0
+              ? `${totalNumberOfPlays} Plays`
+              : "No Views Yet"}
           </Typography>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>

@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## See this in production
+
+[Audiu](https://coding-mountain-audiu.vercel.app/)
 
 ## Getting Started
 
@@ -14,23 +16,30 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- NextJs : Fullstack with react and serverless on NodeJs runtime
+- NeonDB: Postgres DB for serveless with Prisma ORM
+- Material UI: Component Library
+- Clerk : For Basic authentication
+- UploadThing: For file uploads
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Regarding the decion
 
-## Learn More
+As assignment wanted something that uploaded audio file and feature of sharing file to others, something
+in production made for sense than running it locally because of difficulty in testing. I did not have aws account
+so i had to use some free service(uploadthing) for file uploads. Clerk is used for basic authentication so that the
+app is not just public to anyone.
 
-To learn more about Next.js, take a look at the following resources:
+## Features Covered
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [x] Authentication
+- [x] Upload Audio File
+- [x] Timestamp audio share link
+- [x] Number of plays (based on how many time the audio link is opened)
+- [x] Basic Custom Player
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I did is task while trying to learn latest features of nextjs. This might not represent best practices. Various aspects
+can be improved like folder structure and code orgranization.

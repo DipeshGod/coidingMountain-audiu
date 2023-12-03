@@ -8,6 +8,7 @@ import { useState } from "react";
 const AudioUploadForm = ({ setOpen }: any) => {
   const [fileTitle, setFileTitle] = useState<any>("");
   const [uploadedFileUrl, setUploadedFileUrl] = useState<any>("");
+  const [isUploading, setIsUploading] = useState(false);
   const auth = useAuth();
 
   const handleSubmit = async () => {
@@ -17,7 +18,7 @@ const AudioUploadForm = ({ setOpen }: any) => {
         uploadedFileUrl,
         fileTitle,
       });
-      revalidatePath("/", "page");
+      revalidatePath("/page");
       setOpen(false);
       setUploadedFileUrl("");
       setFileTitle("");
@@ -39,8 +40,10 @@ const AudioUploadForm = ({ setOpen }: any) => {
         <Box width="145px" marginTop="1rem">
           <UploadButton
             endpoint="audioUploader"
+            onUploadProgress={() => setIsUploading(true)}
             onClientUploadComplete={(res) => {
               setUploadedFileUrl(res[0].url);
+              setIsUploading(false);
             }}
             onUploadError={(error: Error) => {
               console.log("error");
@@ -53,7 +56,7 @@ const AudioUploadForm = ({ setOpen }: any) => {
           variant="contained"
           onClick={handleSubmit}
         >
-          Save
+          {isUploading ? "Please Wait: File is being uploaded" : "Save"}
         </Button>
       </Box>
     </Container>

@@ -9,10 +9,12 @@ const AudioUploadForm = ({ setOpen }: any) => {
   const [fileTitle, setFileTitle] = useState<any>("");
   const [uploadedFileUrl, setUploadedFileUrl] = useState<any>("");
   const [isUploading, setIsUploading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const auth = useAuth();
 
   const handleSubmit = async () => {
     try {
+      setIsSaving(true);
       await axios.post("/api/audio", {
         userId: auth.userId,
         uploadedFileUrl,
@@ -22,6 +24,7 @@ const AudioUploadForm = ({ setOpen }: any) => {
       setOpen(false);
       setUploadedFileUrl("");
       setFileTitle("");
+      setIsSaving(false);
     } catch (err) {
       console.log("err", err);
     }
@@ -51,7 +54,9 @@ const AudioUploadForm = ({ setOpen }: any) => {
           />
         </Box>
         <Button
-          disabled={fileTitle?.length < 5 || uploadedFileUrl?.length < 5}
+          disabled={
+            fileTitle?.length < 5 || uploadedFileUrl?.length < 5 || isSaving
+          }
           sx={{ marginTop: "1rem" }}
           variant="contained"
           onClick={handleSubmit}

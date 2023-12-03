@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Chip,
   IconButton,
   Typography,
 } from "@mui/material";
@@ -30,15 +31,17 @@ export default function AudioCard({
           <Typography component="div" variant="h5">
             {fileName}
           </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            {totalNumberOfPlays > 0
-              ? `${totalNumberOfPlays} Plays`
-              : "No Views Yet"}
-          </Typography>
+
+          <Chip
+            sx={{ marginTop: "1rem" }}
+            label={
+              totalNumberOfPlays > 0
+                ? `${totalNumberOfPlays} Plays`
+                : "No Views Yet"
+            }
+            color="secondary"
+            variant="filled"
+          />
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
           <Link href={`/audio/${id}?fileUrl=${fileUrl}`}>

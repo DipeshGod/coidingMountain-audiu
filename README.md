@@ -41,5 +41,5 @@ app is not just public to anyone.
 
 ## Notes
 
-I did is task while trying to learn latest features of nextjs. This might not represent best practices. Various aspects
+I did this task while trying to learn latest features of nextjs. This might not represent best practices. Various aspects
 can be improved like folder structure and code orgranization.

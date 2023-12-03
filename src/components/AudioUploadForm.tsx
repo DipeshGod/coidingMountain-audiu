@@ -2,6 +2,7 @@ import { UploadButton } from "@/utils/uploadthing";
 import { useAuth } from "@clerk/nextjs";
 import { Box, Button, Container, TextField } from "@mui/material";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 import { useState } from "react";
 
 const AudioUploadForm = ({ setOpen }: any) => {
@@ -16,6 +17,7 @@ const AudioUploadForm = ({ setOpen }: any) => {
         uploadedFileUrl,
         fileTitle,
       });
+      revalidatePath("/", "page");
       setOpen(false);
       setUploadedFileUrl("");
       setFileTitle("");

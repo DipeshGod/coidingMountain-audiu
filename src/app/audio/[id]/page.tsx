@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import {
+  Box,
   Button,
   Card,
   CardMedia,
@@ -102,41 +103,45 @@ const AudioDetailsPlayer = () => {
           onTimeUpdate={updateTime}
           onEnded={() => setIsPlaying(false)}
         ></audio>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item>
-            <IconButton onClick={handlePlayPause}>
-              {isPlaying ? <Pause /> : <PlayArrow />}
-            </IconButton>
-          </Grid>
-          <Grid item xs>
-            <Slider
-              sx={{ width: "50%" }}
-              value={currentTime}
-              onChange={handleSeek}
-              max={audioRef.current.duration || 0}
-              aria-labelledby="audio-slider"
-            />
-          </Grid>
-          <Grid item>
-            <Typography variant="body2">{formatTime(currentTime)}</Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item>
-            <VolumeUp />
-          </Grid>
-          <Grid item xs>
-            <Slider
-              sx={{ width: "50%" }}
-              value={volume}
-              onChange={handleVolumeChange}
-              min={0}
-              max={1}
-              step={0.1}
-              aria-labelledby="volume-slider"
-            />
-          </Grid>
-        </Grid>
+        <Box
+          marginTop="1rem"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <IconButton onClick={handlePlayPause}>
+            {isPlaying ? (
+              <Pause fontSize="large" />
+            ) : (
+              <PlayArrow fontSize="large" />
+            )}
+          </IconButton>
+
+          <Slider
+            sx={{ width: "50%" }}
+            value={currentTime}
+            onChange={handleSeek}
+            max={audioRef.current.duration || 0}
+            aria-labelledby="audio-slider"
+          />
+
+          <Typography variant="body2" fontSize="1.2rem">
+            {formatTime(currentTime)}
+          </Typography>
+        </Box>
+        <Stack direction="row" spacing={5} padding="1rem">
+          <VolumeUp />
+
+          <Slider
+            sx={{ width: "50%" }}
+            value={volume}
+            onChange={handleVolumeChange}
+            min={0}
+            max={1}
+            step={0.1}
+            aria-labelledby="volume-slider"
+          />
+        </Stack>
         <Button
           variant="contained"
           color="secondary"

@@ -21,6 +21,7 @@ import { useRef, useState } from "react";
 import { Pause, PlayArrow, VolumeUp } from "@mui/icons-material";
 import { useParams, useSearchParams } from "next/navigation";
 import axios from "axios";
+import revalidateHome from "@/app/actions";
 
 const AudioDetailsPlayer = () => {
   const params = useSearchParams();
@@ -81,6 +82,7 @@ const AudioDetailsPlayer = () => {
   useEffect(() => {
     const increaseAudioPlayStat = async () => {
       await axios.post("/api/audioplays", { id: p.id });
+      revalidateHome();
     };
 
     increaseAudioPlayStat();
